@@ -19,6 +19,15 @@ MTSLUI_MissingTradeSkillsListFrame = {
 	-- @type				String		The type of the frame ("tradeskill" or "craftskill")
 	----------------------------------------------------------------------------------------------------------
 	Initialise = function (self, parent_frame, type)
+		if ATSWFrame then
+		self.frame = MTSLUI_Core:CreateBaseFrame("Frame", "", ATSWFrame, nil, MTSLUI_Core.FRAME_WIDTH_MTSL, MTSLUI_Core.FRAME_HEIGHT_MTSL, true)
+		-- Position next to tradeskillframe
+		self.frame:SetPoint("TOPLEFT", ATSWFrame, "TOPRIGHT", -37, -11)
+		self.frame:SetScript("OnMouseWheel", function()
+			-- Dummy operation to do nothing, discarding the zooming in/out
+			local x = 1
+		end)
+		else
 		self.frame = MTSLUI_Core:CreateBaseFrame("Frame", "", parent_frame, nil, MTSLUI_Core.FRAME_WIDTH_MTSL, MTSLUI_Core.FRAME_HEIGHT_MTSL, true)
 		-- Position next to tradeskillframe
 		self.frame:SetPoint("TOPLEFT", parent_frame, "TOPRIGHT", -37, -11)
@@ -26,6 +35,7 @@ MTSLUI_MissingTradeSkillsListFrame = {
 			-- Dummy operation to do nothing, discarding the zooming in/out
 			local x = 1
 		end)
+		end
 		-- Create the childframes
 		MTSLUI_MTSLF_TitleFrame:Initialise(self.frame)
 		MTSLUI_MTSLF_MissingSkillsListFrame:Initialise(self.frame)

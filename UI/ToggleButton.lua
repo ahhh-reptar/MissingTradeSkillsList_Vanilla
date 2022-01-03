@@ -13,6 +13,15 @@ MTSLUI_ToggleButton = {
 	Initialise = function (self, parent_frame, type)
 		-- if not already made
 		if self.frame == nil then
+			if ATSWFrame then
+			self.frame = MTSLUI_Core:CreateBaseFrame("Button", "", ATSWFrame, "UIPanelButtonTemplate", 50, 20)
+			self.frame:SetText("MTSL")
+			self.frame:SetPoint("TOPLEFT", ATSWFrame, "TOPRIGHT", -107, -14)
+			self.frame:SetScript("OnClick", function () 
+				MTSLUI_Core:ToggleMissingTradeSkillsListFrame(self.type) 
+			end)
+			self.frame:Show()			
+			else
 			self.frame = MTSLUI_Core:CreateBaseFrame("Button", "", parent_frame, "UIPanelButtonTemplate", 50, 20)
 			self.frame:SetText("MTSL")
 			self.frame:SetPoint("TOPLEFT", parent_frame, "TOPRIGHT", -107, -14)
@@ -20,6 +29,7 @@ MTSLUI_ToggleButton = {
 				MTSLUI_Core:ToggleMissingTradeSkillsListFrame(self.type) 
 			end)	
 			self.frame:Show()
+			end
 		end
 
 		self.type = type
